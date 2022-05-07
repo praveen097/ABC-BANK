@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +20,7 @@ public class UserCredentials {
 	private String userName;
 	@Column(length = 25, nullable = false)
 	private String password;
+//	private Account account;	
 	
 	public int getUserCredentialId() {
 		return userCredentialId;

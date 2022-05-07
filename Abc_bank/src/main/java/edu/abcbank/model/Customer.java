@@ -2,12 +2,14 @@ package edu.abcbank.model;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +24,7 @@ public class Customer {
 	private String firstName;
 	@Column(length = 30, nullable = true)
 	private String lastName;
-	@Column(length = 30, nullable = false)
+	@Column(name = "emailAddress", length = 30, nullable = false)
 	private String email;
 	@Column(length = 10, nullable = false)
 	private long phone;
@@ -41,7 +43,15 @@ public class Customer {
 	private String gender;
 	@Column(length = 10, nullable = false)
 	private String userType;
+	@OneToMany(mappedBy = "customer")
+	private List<Account> account;
 	
+	public List<Account> getAccount() {
+		return account;
+	}
+	public void setAccount(List<Account> account) {
+		this.account = account;
+	}
 	public int getCustomerId() {
 		return customerId;
 	}

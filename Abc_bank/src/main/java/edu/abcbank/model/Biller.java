@@ -1,12 +1,16 @@
 package edu.abcbank.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,7 +41,24 @@ public class Biller {
 	private double billAmount;
 	@Column(name="billPaymentStatus", nullable = true)
 	private String billPaymentStatus;
+	@ManyToOne
+	@JoinColumn(name = "account_number",nullable = false)
+	private Account account;
+	@OneToMany(mappedBy = "biller")
+	private List<Payment> payement;
 	
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	public List<Payment> getPayement() {
+		return payement;
+	}
+	public void setPayement(List<Payment> payement) {
+		this.payement = payement;
+	}
 	public String getCity() {
 		return City;
 	}
