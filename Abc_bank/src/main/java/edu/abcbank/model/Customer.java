@@ -1,7 +1,5 @@
 package edu.abcbank.model;
 
-public class Customer {
-	
 
 import java.util.Date;
 
