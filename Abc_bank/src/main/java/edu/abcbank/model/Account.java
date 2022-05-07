@@ -1,10 +1,16 @@
 package edu.abcbank.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +31,27 @@ public class Account {
 	private String ifscCode;
 	@Column(length = 25, nullable = false)
 	private String location;
+	@ManyToOne
+	@JoinColumn(name="customer_id",nullable = false)
+	private Customer customer;
+	@OneToOne
+	@JoinColumn(name = "userCredentialId", nullable = false)
+	private UserCredentials userCredentials;
+	@OneToMany(mappedBy = "account")
+	private List<Biller> biller;
 	
+	public UserCredentials getUserCredentials() {
+		return userCredentials;
+	}
+	public void setUserCredentials(UserCredentials userCredentials) {
+		this.userCredentials = userCredentials;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public int getAccountNumber() {
 		return accountNumber;
 	}

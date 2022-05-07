@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +21,9 @@ public class BillPaymentRegistration
 	private int preferedAccount1;
 	@Column(name="preferedAccount2",nullable=true)
 	private int preferedAxccount2;
+	@OneToOne
+	@JoinColumn(name = "customerId", nullable = false)
+	private Customer customer;
 	
 	
 	
