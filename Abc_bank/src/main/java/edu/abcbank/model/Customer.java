@@ -1,5 +1,7 @@
 package edu.abcbank.model;
 
+public class Customer {
+	
 
 import java.util.Date;
 
@@ -114,5 +116,5 @@ public class Customer {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-		
+
 }
