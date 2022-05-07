@@ -1,5 +1,9 @@
 package edu.abcbank.model;
 
-public class Customer {
+public class Customer 
+{
+	
+	
+	
 
 }
