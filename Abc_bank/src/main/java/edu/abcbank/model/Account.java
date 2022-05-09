@@ -4,20 +4,17 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "abc_account")
 public class Account {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
 	private int accountNumber;
 	@Column(nullable = false)
 	private double balance;
@@ -34,18 +31,9 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name="customer_id",nullable = false)
 	private Customer customer;
-	@OneToOne
-	@JoinColumn(name = "userCredentialId", nullable = false)
-	private UserCredentials userCredentials;
 	@OneToMany(mappedBy = "account")
 	private List<Biller> biller;
 	
-	public UserCredentials getUserCredentials() {
-		return userCredentials;
-	}
-	public void setUserCredentials(UserCredentials userCredentials) {
-		this.userCredentials = userCredentials;
-	}
 	public Customer getCustomer() {
 		return customer;
 	}
