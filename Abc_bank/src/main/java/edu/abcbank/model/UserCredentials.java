@@ -20,7 +20,9 @@ public class UserCredentials {
 	private String userName;
 	@Column(length = 25, nullable = false)
 	private String password;
-//	private Account account;	
+	@OneToOne
+	@JoinColumn(name = "accountNumber", nullable = false)
+	private Account account;
 	
 	public int getUserCredentialId() {
 		return userCredentialId;
@@ -33,6 +35,12 @@ public class UserCredentials {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	public String getPassword() {
 		return password;

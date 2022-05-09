@@ -34,18 +34,9 @@ public class Account {
 	@ManyToOne
 	@JoinColumn(name="customer_id",nullable = false)
 	private Customer customer;
-	@OneToOne
-	@JoinColumn(name = "userCredentialId", nullable = false)
-	private UserCredentials userCredentials;
 	@OneToMany(mappedBy = "account")
 	private List<Biller> biller;
 	
-	public UserCredentials getUserCredentials() {
-		return userCredentials;
-	}
-	public void setUserCredentials(UserCredentials userCredentials) {
-		this.userCredentials = userCredentials;
-	}
 	public Customer getCustomer() {
 		return customer;
 	}
