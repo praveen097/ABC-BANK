@@ -1,5 +1,7 @@
 package edu.abcbank.model;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -15,9 +17,9 @@ import javax.persistence.Table;
 public class Account {
 	@Id
 	//@GeneratedValue(strategy = GenerationType.AUTO)
-	private int accountNumber;
+	private BigInteger accountNumber;
 	@Column(nullable = false)
-	private double balance;
+	private BigDecimal balance;
 	@Column(length = 25, nullable = false)
 	private String accountType;
 	@Column(length = 25, nullable = false)
@@ -40,17 +42,24 @@ public class Account {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public int getAccountNumber() {
+	
+	public BigInteger getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(int accountNumber) {
+	public void setAccountNumber(BigInteger accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public double getBalance() {
+	public BigDecimal getBalance() {
 		return balance;
 	}
-	public void setBalance(double balance) {
+	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
+	}
+	public List<Biller> getBiller() {
+		return biller;
+	}
+	public void setBiller(List<Biller> biller) {
+		this.biller = biller;
 	}
 	public String getAccountType() {
 		return accountType;
