@@ -1,6 +1,7 @@
 package edu.abcbank.model;
 
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class Customer {
 	@Column(name = "emailAddress", length = 30, nullable = false)
 	private String email;
 	@Column(length = 10, nullable = false)
-	private long phone;
+	private BigInteger phone;
 	@Column(length = 45, nullable = false)
 	private String address;
 	@Column(length = 20, nullable = false)
@@ -32,7 +33,7 @@ public class Customer {
 	@Column(length = 20, nullable = false)
 	private String state;
 	@Column(nullable = false)
-	private int pinCode;
+	private BigInteger pinCode;
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private Date dateOfBirth;
@@ -55,6 +56,15 @@ public class Customer {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
+	public BigInteger getPhone() {
+		return phone;
+	}
+	public void setPhone(BigInteger phone) {
+		this.phone = phone;
+	}
+	public void setPinCode(BigInteger pinCode) {
+		this.pinCode = pinCode;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -73,12 +83,6 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public long getPhone() {
-		return phone;
-	}
-	public void setPhone(long phone) {
-		this.phone = phone;
-	}
 	public String getAddress() {
 		return address;
 	}
@@ -96,12 +100,6 @@ public class Customer {
 	}
 	public void setState(String state) {
 		this.state = state;
-	}
-	public int getPinCode() {
-		return pinCode;
-	}
-	public void setPinCode(int pinCode) {
-		this.pinCode = pinCode;
 	}
 	public Date getDateOfBirth() {
 		return dateOfBirth;
