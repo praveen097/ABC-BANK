@@ -21,12 +21,11 @@ public class BillPaymentRegistrationServiceImpl implements BillPaymentRegistrati
 		Map<String,Object> map = new HashMap<String, Object>();
 		if(billPaymentRegistrations == null) {
 			map.put("status", "error");
-			map.put("message", "Please enter bill payment registration details");
+			map.put("message", "Bill payment registration details can't be null");
+		}else if(billPaymentRegistrations.getPreferedAccount1() == null) {
+			map.put("status", "error");
+			map.put("message", "Preferred account1 cannot be null");
 		}else {
-			System.out.println("Bill id :" + billPaymentRegistrations.getBillPaymentRegId());
-			System.out.println("acc1 :" + billPaymentRegistrations.getPreferedAccount1());
-			System.out.println("acc2"+billPaymentRegistrations.getPreferedAccount2());
-			System.out.println("customerId: " + billPaymentRegistrations.getCustomer());
 			map.put("status", "success");
 			map.put("message", "Accounts saved successfully");
 			billPaymentRegistrationRepository.save(billPaymentRegistrations);
