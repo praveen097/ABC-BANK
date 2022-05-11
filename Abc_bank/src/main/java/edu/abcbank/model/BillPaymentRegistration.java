@@ -1,5 +1,7 @@
 package edu.abcbank.model;
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,19 +16,36 @@ import javax.persistence.Table;
 public class BillPaymentRegistration 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="billpaymentId")
 	private int billPaymentRegId;
 	@Column(name="preferedAccount1",nullable=false)
-	private int preferedAccount1;
+	private BigInteger preferedAccount1;
 	@Column(name="preferedAccount2",nullable=true)
-	private int preferedAxccount2;
+	private BigInteger preferedAccount2;
 	@OneToOne
 	@JoinColumn(name = "customerId", nullable = false)
 	private Customer customer;
 	
 	
-	
+	public BigInteger getPreferedAccount1() {
+		return preferedAccount1;
+	}
+	public void setPreferedAccount1(BigInteger preferedAccount1) {
+		this.preferedAccount1 = preferedAccount1;
+	}
+	public BigInteger getPreferedAccount2() {
+		return preferedAccount2;
+	}
+	public void setPreferedAccount2(BigInteger preferedAccount2) {
+		this.preferedAccount2 = preferedAccount2;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 	public int getBillPaymentRegId() 
 	{
 		return billPaymentRegId;
@@ -35,21 +54,6 @@ public class BillPaymentRegistration
 	{
 		this.billPaymentRegId = billPaymentRegId;
 	}
-	public int getPreferedAccount1() 
-	{
-		return preferedAccount1;
-	}
-	public void setPreferedAccount1(int preferedAccount1) 
-	{
-		this.preferedAccount1 = preferedAccount1;
-	}
-	public int getPreferedAxccount2() 
-	{
-		return preferedAxccount2;
-	}
-	public void setPreferedAxccount2(int preferedAxccount2) 
-	{
-		this.preferedAxccount2 = preferedAxccount2;
-	}
+	
 
 }
