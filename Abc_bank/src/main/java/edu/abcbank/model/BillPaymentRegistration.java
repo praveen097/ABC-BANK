@@ -4,8 +4,6 @@ import java.math.BigInteger;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -16,7 +14,6 @@ import javax.persistence.Table;
 public class BillPaymentRegistration 
 {
 	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="billpaymentId")
 	private int billPaymentRegId;
 	@Column(name="preferedAccount1",nullable=false)

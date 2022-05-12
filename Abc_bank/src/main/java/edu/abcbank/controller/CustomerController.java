@@ -20,7 +20,6 @@ public class CustomerController {
 	@RequestMapping(value="/getAccountsOfCustomer", method = RequestMethod.POST)
 	public Object getAccountsOfCustomer(@RequestBody Customer customer)	{
 		return (customerService.getAccountsOfCustomer(customer));
-		
 	}
 
 }

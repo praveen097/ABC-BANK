@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.abcbank.model.Account;
 import edu.abcbank.model.BillPaymentRegistration;
 import edu.abcbank.repository.BillPaymentRegistrationRepository;
 import edu.abcbank.service.BillPaymentRegistrationService;

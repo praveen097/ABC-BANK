@@ -1,5 +1,7 @@
 package edu.abcbank.model;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -21,24 +23,24 @@ public class Biller {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="billerId")
-	private int billerId;
+	private BigInteger billerId;
 	@Column(name="billerName", length = 30, nullable = false)
 	private String billerName;
 	@Column(name="billerAddress", length = 40, nullable = false)
 	private String billerAddress;
 	@Column(name="city",length = 15, nullable = false)
-	private String City;
+	private String city;
 	@Column(name="pincode", nullable = false)
-	private int pinCode;
+	private BigInteger pinCode;
 	@Column(name="billercategory", length = 15, nullable = false)
-	private String billercategory;
+	private String billerCategory;
 	@Column(name="billerStatus", length = 20, nullable = true)
 	private String billerStatus;
 	@Column(name="due_date", nullable = true)
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
 	@Column(name="billAmount", nullable = true)
-	private double billAmount;
+	private BigDecimal billAmount;
 	@Column(name="billPaymentStatus", nullable = true)
 	private String billPaymentStatus;
 	@ManyToOne
@@ -60,16 +62,16 @@ public class Biller {
 		this.payement = payement;
 	}
 	public String getCity() {
-		return City;
+		return city;
 	}
 	public void setCity(String city) {
-		City = city;
+		this.city = city;
 	}
-	public String getBillercategory() {
-		return billercategory;
+	public String getBillerCategory() {
+		return billerCategory;
 	}
-	public void setBillercategory(String billercategory) {
-		this.billercategory = billercategory;
+	public void setBillerCategory(String billercategory) {
+		this.billerCategory = billercategory;
 	}
 	public String getBillPaymentStatus() {
 		return billPaymentStatus;
@@ -77,10 +79,10 @@ public class Biller {
 	public void setBillPaymentStatus(String billPaymentStatus) {
 		this.billPaymentStatus = billPaymentStatus;
 	}
-	public int getBillerId() {
+	public BigInteger getBillerId() {
 		return billerId;
 	}
-	public void setBillerId(int billerId) {
+	public void setBillerId(BigInteger billerId) {
 		this.billerId = billerId;
 	}
 	public String getBillerName() {
@@ -96,10 +98,10 @@ public class Biller {
 		this.billerAddress = billerAddress;
 	}
 	
-	public int getPinCode() {
+	public BigInteger getPinCode() {
 		return pinCode;
 	}
-	public void setPinCode(int pinCode) {
+	public void setPinCode(BigInteger pinCode) {
 		this.pinCode = pinCode;
 	}
 	
@@ -115,10 +117,10 @@ public class Biller {
 	public void setDueDate(Date dueDate) {
 		this.dueDate = dueDate;
 	}
-	public double getBillAmount() {
+	public BigDecimal getBillAmount() {
 		return billAmount;
 	}
-	public void setBillAmount(double billAmount) {
+	public void setBillAmount(BigDecimal billAmount) {
 		this.billAmount = billAmount;
 	}
 
