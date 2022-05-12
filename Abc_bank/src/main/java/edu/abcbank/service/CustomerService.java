@@ -1,5 +1,7 @@
 package edu.abcbank.service;
 
-public interface CustomerService {
+import edu.abcbank.model.Customer;
 
+public interface CustomerService {
+	public Object getAccountsOfCustomer(Customer customer);
 }
