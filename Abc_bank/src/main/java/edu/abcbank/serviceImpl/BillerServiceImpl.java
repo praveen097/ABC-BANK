@@ -81,9 +81,6 @@ public class BillerServiceImpl implements BillerService {
 	public Object getBillerByAccountNumber(BigInteger accountNumber ){
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
         List<List<Biller>> biller1 = billerRepository.fetchBillerByAccountNumber(accountNumber);
-        System.out.println("hgjnhcnghjhguj" +biller1.get(0));
-        System.out.println("hgjnhcnghjhguj" +biller1.get(1));
-        System.out.println("hgjnhcnghjhguj" +biller1.get(2));
 
      for(List<Biller> b : biller1) {
     	 Map<String, Object> map = new HashMap<String, Object>();

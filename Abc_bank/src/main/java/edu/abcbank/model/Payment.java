@@ -1,5 +1,7 @@
 package edu.abcbank.model;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -18,9 +20,9 @@ import javax.persistence.TemporalType;
 public class Payment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int paymentId;
+	private BigInteger paymentId;
 	@Column(nullable = true)
-	private double payingAmount;
+	private BigDecimal payingAmount;
 	@Column(name="paymentDate", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date paymentDate;
@@ -39,16 +41,16 @@ public class Payment {
 	public void setBiller(Biller biller) {
 		this.biller = biller;
 	}
-	public int getPaymentId() {
+	public BigInteger getPaymentId() {
 		return paymentId;
 	}
-	public void setPaymentId(int paymentId) {
+	public void setPaymentId(BigInteger paymentId) {
 		this.paymentId = paymentId;
 	}
-	public double getPayingAmount() {
+	public BigDecimal getPayingAmount() {
 		return payingAmount;
 	}
-	public void setPayingAmount(double payingAmount) {
+	public void setPayingAmount(BigDecimal payingAmount) {
 		this.payingAmount = payingAmount;
 	}
 	public Date getPaymentDate() {
