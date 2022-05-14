@@ -2,6 +2,7 @@ package edu.abcbank.serviceImpl;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,9 +93,7 @@ public class BillerServiceImpl implements BillerService {
         	 map.put("pinCode", b1.getPinCode());
         	 map.put("billerCategory", b1.getBillerCategory());
         	 map.put("billerStatus", b1.getBillerStatus());
-        	 map.put("dueDate", b1.getDueDate());
-        	 map.put("billAmount", b1.getBillAmount());
-        	 map.put("billPaymentStatus", b1.getBillPaymentStatus());
+        	 map.put("dueDate", b1.getFixedBillAmount());
         	 list.add(map);	 
     	 } 	 
         
@@ -103,4 +102,19 @@ public class BillerServiceImpl implements BillerService {
 		
 	}
 
+	@Override
+	public Object setFixedBillAmountByBillerId(Biller biller) {
+		
+		return null;
+	}
+
+
+
+
+	
+
+	
 }
+
+	
+

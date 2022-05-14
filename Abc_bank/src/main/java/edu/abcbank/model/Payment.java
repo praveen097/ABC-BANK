@@ -26,8 +26,14 @@ public class Payment {
 	@Column(name="paymentDate", nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Date paymentDate;
-	@Column(name="paymentMadeBy", length = 20, nullable = false)
-	private String paymentMadeBy;
+	@Column(name="due_date", nullable = true)
+	@Temporal(TemporalType.DATE)
+	private Date dueDate;
+	@Column(name="billAmount", nullable = true)
+	private BigDecimal billAmount;
+	@Column(name="billPaymentStatus", nullable = true)
+	private String billPaymentStatus;
+	
 	@ManyToOne
 	@JoinColumn(name = "biller_id", nullable = false)
 	private Biller biller;
@@ -35,6 +41,24 @@ public class Payment {
 	
 //	Getters and setters
 	
+	public Date getDueDate() {
+		return dueDate;
+	}
+	public void setDueDate(Date dueDate) {
+		this.dueDate = dueDate;
+	}
+	public BigDecimal getBillAmount() {
+		return billAmount;
+	}
+	public void setBillAmount(BigDecimal billAmount) {
+		this.billAmount = billAmount;
+	}
+	public String getBillPaymentStatus() {
+		return billPaymentStatus;
+	}
+	public void setBillPaymentStatus(String billPaymentStatus) {
+		this.billPaymentStatus = billPaymentStatus;
+	}
 	public Biller getBiller() {
 		return biller;
 	}
@@ -59,10 +83,5 @@ public class Payment {
 	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
-	public String getPaymentMadeBy() {
-		return paymentMadeBy;
-	}
-	public void setPaymentMadeBy(String paymentMadeBy) {
-		this.paymentMadeBy = paymentMadeBy;
-	}
+
 }

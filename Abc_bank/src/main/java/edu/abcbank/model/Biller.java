@@ -23,7 +23,7 @@ public class Biller {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="billerId")
-	private BigInteger billerId;
+	private int billerId;
 	@Column(name="billerName", length = 30, nullable = false)
 	private String billerName;
 	@Column(name="billerAddress", length = 40, nullable = false)
@@ -36,19 +36,21 @@ public class Biller {
 	private String billerCategory;
 	@Column(name="billerStatus", length = 20, nullable = true)
 	private String billerStatus;
-	@Column(name="due_date", nullable = true)
-	@Temporal(TemporalType.DATE)
-	private Date dueDate;
-	@Column(name="billAmount", nullable = true)
-	private BigDecimal billAmount;
-	@Column(name="billPaymentStatus", nullable = true)
-	private String billPaymentStatus;
+	@Column(name="fixedBillAmount", length = 20, nullable = true)
+	private BigDecimal fixedBillAmount;
+	
 	@ManyToOne
 	@JoinColumn(name = "account_number",nullable = false)
 	private Account account;
 	@OneToMany(mappedBy = "biller")
 	private List<Payment> payement;
 	
+	public BigDecimal getFixedBillAmount() {
+		return fixedBillAmount;
+	}
+	public void setFixedBillAmount(BigDecimal fixedBillAmount) {
+		this.fixedBillAmount = fixedBillAmount;
+	}
 	public Account getAccount() {
 		return account;
 	}
@@ -73,16 +75,11 @@ public class Biller {
 	public void setBillerCategory(String billercategory) {
 		this.billerCategory = billercategory;
 	}
-	public String getBillPaymentStatus() {
-		return billPaymentStatus;
-	}
-	public void setBillPaymentStatus(String billPaymentStatus) {
-		this.billPaymentStatus = billPaymentStatus;
-	}
-	public BigInteger getBillerId() {
+	
+	public int getBillerId() {
 		return billerId;
 	}
-	public void setBillerId(BigInteger billerId) {
+	public void setBillerId(int billerId) {
 		this.billerId = billerId;
 	}
 	public String getBillerName() {
@@ -111,18 +108,7 @@ public class Biller {
 	public void setBillerStatus(String billerStatus) {
 		this.billerStatus = billerStatus;
 	}
-	public Date getDueDate() {
-		return dueDate;
-	}
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
-	}
-	public BigDecimal getBillAmount() {
-		return billAmount;
-	}
-	public void setBillAmount(BigDecimal billAmount) {
-		this.billAmount = billAmount;
-	}
+	
 
 	
 }

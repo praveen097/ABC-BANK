@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import edu.abcbank.model.Payment;
 import edu.abcbank.service.PaymentService;
 
@@ -33,7 +34,24 @@ public class PaymentController {
 	@Transactional
 	@RequestMapping(value = "/fetchAllBillersByAccountNumber/{accountNumber}", method = RequestMethod.GET)
 	public Object fetchBillersByAccountNumber(@PathVariable BigInteger accountNumber) {
-		return(paymentService.getBillersByAccountNumber(accountNumber));
+		return (paymentService.getBillersByAccountNumber(accountNumber));
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/updateDueDateByBillerId", method = RequestMethod.POST)
+	public Object updateBillerDueDateByBillerId(@RequestBody Payment payment) {
+		return (paymentService.updateBillerDueDate(payment.getBiller().getBillerId(), payment.getDueDate()));
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/fetchAllPaymentsByBillerId", method = RequestMethod.POST)
+	public Object fetchAllPaymentByBillerId(@RequestBody Payment payment) {
+		return (paymentService.fetchAllPaymentsByBillerId(payment.getBiller().getBillerId()));
 	}
 
+	@Transactional
+	@RequestMapping(value = "/fetchAllPaymentsByCategory", method = RequestMethod.POST)
+	public Object fetchAllPaymentByCategory(@RequestBody Payment payment) {
+		return (paymentService.fetchAllPaymentsByCategory(payment.getBiller().getAccount().getAccountNumber(),payment.getBiller().getBillerCategory()));
+	}
 }

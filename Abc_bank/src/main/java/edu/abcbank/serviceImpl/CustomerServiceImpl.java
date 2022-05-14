@@ -34,6 +34,7 @@ public class CustomerServiceImpl implements CustomerService{
 				for(Account a : accounts) {
 					Map<String, Object> map = new HashMap<String, Object>();
 					map.put("accountNumber", a.getAccountNumber());
+					map.put("customerName", a.getCustomer().getFirstName());
 					list.add(map);
 				}
 			}
