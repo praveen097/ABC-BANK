@@ -10,8 +10,9 @@ public interface PaymentService {
 	public Object makePayment(Payment payment);
 	public Object getBillersByAccountNumber(BigInteger accountNumber);
 	public Object updateBillerDueDate(int billerId, Date dueDate);
-	public Object fetchAllPaymentsByBillerId(int billerId);
+	public Object fetchAllPaymentsByAccountNumber(BigInteger accountNumber);
 	public Object fetchAllPaymentsByCategory(BigInteger accountNumber, String category);
-//	public Object fetchAllPaymentsByCategory(BigInteger accountNumber, String category, String status);
+	public Object fetchAllPaymentsByCategoryAndStatus(BigInteger accountNumber, String category, String status);
+	public Object fetchPaymentUsingBillerId(Payment payment);
 
 }

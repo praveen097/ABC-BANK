@@ -3,6 +3,7 @@ package edu.abcbank.controller;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,7 @@ import edu.abcbank.model.Customer;
 import edu.abcbank.service.CustomerService;
 
 @RestController
+@CrossOrigin
 public class CustomerController {
 	@Autowired
 	private CustomerService customerService;

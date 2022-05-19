@@ -57,6 +57,7 @@ public class PaymentServiceImpl implements PaymentService{
     	 for(Biller b1 : b) {
     		 map.put("billerId", b1.getBillerId());
     		 map.put("billerName", b1.getBillerName());
+    		 map.put("fixedAmount", b1.getFixedBillAmount());
         	 list.add(map);	 
     	 } 	 
         
@@ -68,38 +69,45 @@ public class PaymentServiceImpl implements PaymentService{
 	@Override
 	public Object updateBillerDueDate(int billerId, Date dueDate) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		if(billerId == 0) {
-			map.put("status", "error");
-	 		map.put("message", "due date cannot be null");
-		}else {
-			Payment payment = paymentRepository.getPaymentByBillerId(billerId);
-			if(payment != null) {
-				map.put("status", "success");
-				payment.setDueDate(dueDate);
-				paymentRepository.saveAndFlush(payment);
-			}else {
-				map.put("status", "error");
-		 		map.put("message", "no biller found with this biller id");
-			}
-		}
+//		if(billerId == 0) {
+//			System.out.println("inside if");
+//			map.put("status", "error");
+//	 		map.put("message", "due date cannot be null");
+//		}else {
+		System.out.println(".............");
+//		Payment payment = paymentRepository.getPaymentByBillerId(billerId);
+//		Biller biller = paymentRepository.getBillerDetailsByBillerId(billerId);
+//			Payment payment = paymentRepository.getPaymentByBillerId(billerId);
+//			System.out.println("inside else" + biller);
+
+//			if(payment != null) {
+//				map.put("status", "success");
+//				payment.setDueDate(dueDate);
+//				paymentRepository.saveAndFlush(payment);
+//			}else {
+//				map.put("status", "error");
+//		 		map.put("message", "no biller found with this biller id");
+//			}
+//		}
 		
 		return map;
 	}
 
 	@Override
-	public Object fetchAllPaymentsByBillerId(int billerId) {
+	public Object fetchAllPaymentsByAccountNumber(BigInteger accountNumber) {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-      List<List<Payment>> payment1 = paymentRepository.fetchAllPaymentsByBillerId(billerId);
+      List<List<Payment>> payment1 = paymentRepository.fetchAllPaymentsByAccountNumber(accountNumber);
 
    for(List<Payment> b : payment1) {
   	 Map<String, Object> map = new HashMap<String, Object>();
   	 for(Payment b1 : b) {
+  		 map.put("paymentId", b1.getPaymentId());
   		 map.put("Amount", b1.getBillAmount());
   		 map.put("paymentDate", b1.getPaymentDate());
   		 map.put("accountNumber", b1.getBiller().getAccount().getAccountNumber());
   		 map.put("billerName", b1.getBiller().getBillerName());
   		 map.put("category", b1.getBiller().getBillerCategory());
-  		 map.put("status", b1.getBiller().getBillerStatus());
+  		 map.put("status", b1.getBillPaymentStatus());
 
       	 list.add(map);	 
   	 } 	 
@@ -112,16 +120,16 @@ public class PaymentServiceImpl implements PaymentService{
 	public Object fetchAllPaymentsByCategory(BigInteger accountNumber,  String category) {
 		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
 	      List<List<Payment>> payment1 = paymentRepository.fetchAllPaymentsByCategory(accountNumber, category);
-
 	   for(List<Payment> b : payment1) {
 	  	 Map<String, Object> map = new HashMap<String, Object>();
 	  	 for(Payment b1 : b) {
+	  		 map.put("paymentId", b1.getPaymentId());
 	  		 map.put("Amount", b1.getBillAmount());
 	  		 map.put("paymentDate", b1.getPaymentDate());
 	  		 map.put("accountNumber", b1.getBiller().getAccount().getAccountNumber());
 	  		 map.put("billerName", b1.getBiller().getBillerName());
 	  		 map.put("category", b1.getBiller().getBillerCategory());
-	  		 map.put("status", b1.getBiller().getBillerStatus());
+	  		 map.put("status", b1.getBillPaymentStatus());
 
 	      	 list.add(map);	 
 	  	 } 	 
@@ -130,26 +138,49 @@ public class PaymentServiceImpl implements PaymentService{
 	return list;
 	}
 
-//	@Override
-//	public Object fetchAllPaymentsByCategory(BigInteger accountNumber, String category, String status) {
-//		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
-//	      List<List<Payment>> payment1 = paymentRepository.fetchAllPaymentsByCategoryAndStatus(accountNumber, category);
-//
-//	   for(List<Payment> b : payment1) {
-//	  	 Map<String, Object> map = new HashMap<String, Object>();
-//	  	 for(Payment b1 : b) {
-//	  		 map.put("Amount", b1.getBillAmount());
-//	  		 map.put("paymentDate", b1.getPaymentDate());
-//	  		 map.put("accountNumber", b1.getBiller().getAccount().getAccountNumber());
-//	  		 map.put("billerName", b1.getBiller().getBillerName());
-//	  		 map.put("category", b1.getBiller().getBillerCategory());
-//	  		 map.put("status", b1.getBiller().getBillerStatus());
-//
-//	      	 list.add(map);	 
-//	  	 } 	 
-//
-//	   }
-//	return list;
-//
-//}
+	@Override
+	public Object fetchAllPaymentsByCategoryAndStatus(BigInteger accountNumber, String category, String status) {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+	      List<List<Payment>> payment1 = paymentRepository.fetchAllPaymentsByCategoryAndStatus(accountNumber, category,status);
+	      System.out.println("............");
+	      System.out.println(payment1);
+	      if(payment1.isEmpty()) {
+	 	  	 Map<String, Object> map = new HashMap<String, Object>();
+	 	  	 map.put("status", "error");
+	 	  	 map.put("message", "no data found with this account number or category or status");
+	 	  	 return map;
+	      }
+	   for(List<Payment> b : payment1) {
+	  	 Map<String, Object> map = new HashMap<String, Object>();
+	  	 for(Payment b1 : b) {
+	  		 map.put("paymentId", b1.getPaymentId());
+	  		 map.put("Amount", b1.getBillAmount());
+	  		 map.put("paymentDate", b1.getPaymentDate());
+	  		 map.put("accountNumber", b1.getBiller().getAccount().getAccountNumber());
+	  		 map.put("billerName", b1.getBiller().getBillerName());
+	  		 map.put("category", b1.getBiller().getBillerCategory());
+	  		 map.put("status", b1.getBillPaymentStatus());
+
+	      	 list.add(map);	 
+	  	 } 	 
+
+	   }
+	return list;
+
+}
+
+	@Override
+	public Object fetchPaymentUsingBillerId(Payment payment) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		Payment payment2 = paymentRepository.fetchPaymentByBillerId(payment.getBiller().getBillerId(),payment.getPaymentId());
+		if(payment2 != null) {
+			map.put("status", "success");
+			System.out.println("..........."+payment.getDueDate());
+			payment2.setDueDate(payment.getDueDate());
+			paymentRepository.saveAndFlush(payment2);
+			System.out.println("............");
+
+		}
+		return map;
+	}
 }

@@ -107,6 +107,23 @@ public class BillerServiceImpl implements BillerService {
 		
 		return null;
 	}
+	
+	@Transactional
+	@Override
+	public Object getBillerById(int billerId) {
+		Map<String, Object> map = new HashMap<String,Object>();
+		Biller biller = billerRepository.getById(billerId);
+		 map.put("billerId", biller.getBillerId());
+		 map.put("billerName", biller.getBillerName());
+    	 map.put("billerAddress", biller.getBillerAddress());
+    	 map.put("city", biller.getCity());
+    	 map.put("pinCode", biller.getPinCode());
+    	 map.put("billerCategory", biller.getBillerCategory());
+    	 map.put("billerStatus", biller.getBillerStatus());
+    	 map.put("dueDate", biller.getFixedBillAmount());
+//    	 map.put("accountNumber",biller.getAccount().getAccountNumber());
+		return map;
+	}
 
 
 

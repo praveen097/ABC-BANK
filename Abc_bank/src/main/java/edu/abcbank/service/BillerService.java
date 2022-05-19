@@ -10,4 +10,5 @@ public interface BillerService {
 	public Object updateBiller(Biller biller);
 	public Object getBillerByAccountNumber(BigInteger accountNumber);
 	public Object setFixedBillAmountByBillerId(Biller biller);
+	public Object getBillerById(int billerId);
 }
