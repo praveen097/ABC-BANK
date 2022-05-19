@@ -65,33 +65,6 @@ public class PaymentServiceImpl implements PaymentService{
 		return list;
 	}
 
-	@Transactional
-	@Override
-	public Object updateBillerDueDate(int billerId, Date dueDate) {
-		Map<String, Object> map = new HashMap<String, Object>();
-//		if(billerId == 0) {
-//			System.out.println("inside if");
-//			map.put("status", "error");
-//	 		map.put("message", "due date cannot be null");
-//		}else {
-		System.out.println(".............");
-//		Payment payment = paymentRepository.getPaymentByBillerId(billerId);
-//		Biller biller = paymentRepository.getBillerDetailsByBillerId(billerId);
-//			Payment payment = paymentRepository.getPaymentByBillerId(billerId);
-//			System.out.println("inside else" + biller);
-
-//			if(payment != null) {
-//				map.put("status", "success");
-//				payment.setDueDate(dueDate);
-//				paymentRepository.saveAndFlush(payment);
-//			}else {
-//				map.put("status", "error");
-//		 		map.put("message", "no biller found with this biller id");
-//			}
-//		}
-		
-		return map;
-	}
 
 	@Override
 	public Object fetchAllPaymentsByAccountNumber(BigInteger accountNumber) {
@@ -108,6 +81,7 @@ public class PaymentServiceImpl implements PaymentService{
   		 map.put("billerName", b1.getBiller().getBillerName());
   		 map.put("category", b1.getBiller().getBillerCategory());
   		 map.put("status", b1.getBillPaymentStatus());
+  		 map.put("billerId", b1.getBiller().getBillerId());
 
       	 list.add(map);	 
   	 } 	 
@@ -130,7 +104,7 @@ public class PaymentServiceImpl implements PaymentService{
 	  		 map.put("billerName", b1.getBiller().getBillerName());
 	  		 map.put("category", b1.getBiller().getBillerCategory());
 	  		 map.put("status", b1.getBillPaymentStatus());
-
+	  		 map.put("billerId", b1.getBiller().getBillerId());
 	      	 list.add(map);	 
 	  	 } 	 
 
@@ -160,7 +134,7 @@ public class PaymentServiceImpl implements PaymentService{
 	  		 map.put("billerName", b1.getBiller().getBillerName());
 	  		 map.put("category", b1.getBiller().getBillerCategory());
 	  		 map.put("status", b1.getBillPaymentStatus());
-
+	  		 map.put("billerId", b1.getBiller().getBillerId());
 	      	 list.add(map);	 
 	  	 } 	 
 
@@ -175,12 +149,74 @@ public class PaymentServiceImpl implements PaymentService{
 		Payment payment2 = paymentRepository.fetchPaymentByBillerId(payment.getBiller().getBillerId(),payment.getPaymentId());
 		if(payment2 != null) {
 			map.put("status", "success");
-			System.out.println("..........."+payment.getDueDate());
+			payment2.setDueDate(payment.getDueDate());
 			payment2.setDueDate(payment.getDueDate());
 			paymentRepository.saveAndFlush(payment2);
-			System.out.println("............");
-
+		}else {
+			map.put("status", "error");
+			map.put("message", "Payment id or biller id are wrong");
 		}
 		return map;
+	}
+
+	@Transactional
+	@Override
+	public Object deletePaymentUsingPaymentId(BigInteger id) {		
+		Payment payment=paymentRepository.findById(id).orElse(null);
+		System.out.println(payment);
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(payment.getPaymentId().ZERO != null) {
+			paymentRepository.delete(payment);
+			map.put("status", "success");
+			map.put("message", "deleted payment successfully");
+		 }else {
+			 map.put("status", "error");
+			 map.put("message", "failed to delete the record");
+		 }
+		return map;
+	}
+
+
+	@Override
+	public Object fetchAllPaymentsByCategoryAndStatusAndDate(BigInteger accountNumber, String category, String status,
+			Date fromDate, Date toDate) {
+		System.out.println(accountNumber);
+		System.out.println(category);
+		System.out.println(status);
+		System.out.println(toDate);
+		System.out.println(fromDate);
+
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+	      List<List<Payment>> payment1 = paymentRepository.fetchAllPaymentsByCategoryAndStatusAndDate(accountNumber, category,status,fromDate,toDate);
+	      System.out.println("............");
+	      System.out.println(payment1);
+	      if(payment1.isEmpty()) {
+	 	  	 Map<String, Object> map = new HashMap<String, Object>();
+	 	  	 map.put("status", "error");
+	 	  	 map.put("message", "no data found with this account number or category or status");
+	 	  	 return map;
+	      }
+	   for(List<Payment> b : payment1) {
+	  	 Map<String, Object> map = new HashMap<String, Object>();
+	  	 for(Payment b1 : b) {
+	  		 map.put("paymentId", b1.getPaymentId());
+	  		 map.put("Amount", b1.getBillAmount());
+	  		 map.put("paymentDate", b1.getPaymentDate());
+	  		 map.put("accountNumber", b1.getBiller().getAccount().getAccountNumber());
+	  		 map.put("billerName", b1.getBiller().getBillerName());
+	  		 map.put("category", b1.getBiller().getBillerCategory());
+	  		 map.put("status", b1.getBillPaymentStatus());
+	  		 map.put("billerId", b1.getBiller().getBillerId());
+	      	 list.add(map);	 
+	  	 } 	 
+
+	   }
+	return list;
+	}
+
+	@Override
+	public Object updateBillerDueDate(int billerId, Date dueDate) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

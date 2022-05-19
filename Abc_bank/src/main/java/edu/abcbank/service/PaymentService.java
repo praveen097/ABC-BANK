@@ -14,5 +14,7 @@ public interface PaymentService {
 	public Object fetchAllPaymentsByCategory(BigInteger accountNumber, String category);
 	public Object fetchAllPaymentsByCategoryAndStatus(BigInteger accountNumber, String category, String status);
 	public Object fetchPaymentUsingBillerId(Payment payment);
+	public Object deletePaymentUsingPaymentId(BigInteger id);
+	public Object fetchAllPaymentsByCategoryAndStatusAndDate(BigInteger accountNumber, String category, String status,Date fromDate,Date toDate);
 
 }

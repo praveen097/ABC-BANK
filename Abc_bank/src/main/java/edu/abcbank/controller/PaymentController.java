@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import edu.abcbank.model.FetchPayments;
 import edu.abcbank.model.Payment;
 import edu.abcbank.service.PaymentService;
 
@@ -62,5 +62,15 @@ public class PaymentController {
 	@RequestMapping(value = "/fetchAllPaymentsByCategoryAndStatus", method = RequestMethod.POST)
 	public Object fetchAllPaymentByCategoryAndStatus(@RequestBody Payment payment) {
 		return (paymentService.fetchAllPaymentsByCategoryAndStatus(payment.getBiller().getAccount().getAccountNumber(),payment.getBiller().getBillerCategory(), payment.getBillPaymentStatus()));
+	}
+	@Transactional
+	@RequestMapping(value = "/deletePaymentByPaymentId/{id}", method = RequestMethod.DELETE)
+	public Object deletePaymentByPaymentId(@PathVariable BigInteger id) {
+		return (paymentService.deletePaymentUsingPaymentId(id));
+	}
+	@Transactional
+	@RequestMapping(value = "/fetchAllPaymentsByCategoryAndStatusAndDate", method = RequestMethod.POST)
+	public Object fetchAllPaymentByCategoryAndStatusAndDate(@RequestBody FetchPayments fetchPayments) {
+		return (paymentService.fetchAllPaymentsByCategoryAndStatusAndDate(fetchPayments.getAccountNumber(), fetchPayments.getCategory(), fetchPayments.getStatus(), fetchPayments.getFromDate(), fetchPayments.getToDate()));
 	}
 }

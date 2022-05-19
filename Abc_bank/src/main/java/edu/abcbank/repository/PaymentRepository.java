@@ -14,7 +14,7 @@ import edu.abcbank.model.Biller;
 import edu.abcbank.model.Payment;
 
 @Repository
-public interface PaymentRepository extends JpaRepository<Payment, Integer> {
+public interface PaymentRepository extends JpaRepository<Payment, BigInteger> {
 	@Query("select a from Account a where a.accountNumber=:accountNumber")
 	Account getAccountBalanceByAccountNumber(BigInteger accountNumber);
 	
@@ -33,6 +33,10 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer> {
 	
 	@Query("select p from Payment p where p.biller.billerId=:billerId and p.paymentId=:paymentId")
 	Payment fetchPaymentByBillerId(@Param("billerId") int billerId,@Param("paymentId") BigInteger paymentId);
+	
+	@Query("select p from Payment p where p.biller.account.accountNumber=:accountNumber and p.biller.billerCategory=:category and p.billPaymentStatus=:status and p.paymentDate>:fromDate and p.paymentDate<:toDate")
+	List<List<Payment>> fetchAllPaymentsByCategoryAndStatusAndDate(BigInteger accountNumber, String category,
+			String status, Date fromDate, Date toDate);
 	
 
 }
