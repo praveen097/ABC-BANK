@@ -1,7 +1,5 @@
 package edu.abcbank.controller;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,19 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.abcbank.model.Customer;
-import edu.abcbank.service.CustomerService;
+import edu.abcbank.model.UserCredentials;
+import edu.abcbank.service.UserCredentialsService;
 
 @RestController
 @CrossOrigin
-public class CustomerController {
+public class UserCredentialsController {
 	@Autowired
-	private CustomerService customerService;
+	private UserCredentialsService credentialsService;
 	
-	@Transactional
-	@RequestMapping(value="/getAccountsOfCustomer", method = RequestMethod.POST)
-	public Object getAccountsOfCustomer(@RequestBody Customer customer)	{
-		return (customerService.getAccountsOfCustomer(customer));
+	@RequestMapping(value = "/validateUser", method = RequestMethod.POST)
+	public Object getAccountNumber(@RequestBody UserCredentials credentials) {
+		return credentialsService.validateUser(credentials);
+		
 	}
-
 }

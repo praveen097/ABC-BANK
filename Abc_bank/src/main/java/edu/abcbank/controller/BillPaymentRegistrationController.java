@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.abcbank.model.Customer;
-import edu.abcbank.service.CustomerService;
+import edu.abcbank.model.BillPaymentRegistration;
+import edu.abcbank.service.BillPaymentRegistrationService;
 
 @RestController
 @CrossOrigin
-public class CustomerController {
+public class BillPaymentRegistrationController {
 	@Autowired
-	private CustomerService customerService;
+	private BillPaymentRegistrationService billPaymentRegistrationService;
 	
 	@Transactional
-	@RequestMapping(value="/getAccountsOfCustomer", method = RequestMethod.POST)
-	public Object getAccountsOfCustomer(@RequestBody Customer customer)	{
-		return (customerService.getAccountsOfCustomer(customer));
+	@RequestMapping(value = "/insertAccounts", method = RequestMethod.POST)
+	public Object insertAccounts(@RequestBody BillPaymentRegistration billPaymentRegistration) {
+		return (billPaymentRegistrationService.insertAccount(billPaymentRegistration));
 	}
 
 }
